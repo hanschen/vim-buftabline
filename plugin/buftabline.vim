@@ -68,9 +68,10 @@ function! buftabline#render()
 			if strlen(suf) | let bufpath = fnamemodify(bufpath, ':h') | endif
 			let tab.head = fnamemodify(bufpath, ':h')
 			let tab.tail = fnamemodify(bufpath, ':t')
-			let pre = ( show_mod && getbufvar(bufnum, '&mod') ? '+' : '' ) . ( show_num ? bufnum : '' )
+			let pre =  show_num ? bufnum : ''
 			if strlen(pre) | let pre .= ' ' | endif
-			let tab.fmt = lpad . pre . '%s' . suf . ' '
+            let modified = show_mod && getbufvar(bufnum, '&mod') ? '*' : ' '
+			let tab.fmt = lpad . pre . '%s' . suf . modified . ' '
 			let tabs_by_tail[tab.tail] = get(tabs_by_tail, tab.tail, []) + [tab]
 		elseif -1 < index(['nofile','acwrite'], getbufvar(bufnum, '&buftype')) " scratch buffer
 			let tab.label = lpad . ( show_num ? show_mod ? '!' . bufnum . ' ' : bufnum . ' ! ' : '! ' )
