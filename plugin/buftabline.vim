@@ -78,7 +78,7 @@ function! buftabline#render()
 		else " unnamed file
 			let tab.label = lpad
 						\ . ( show_mod && getbufvar(bufnum, '&mod') ? '[No Name]' : '' )
-						\ . ( show_num ? bufnum . ' ' : '* ' )
+						\ . ( show_num ? bufnum . ' ' : '[No Name] ' )
 		endif
 		let tabs += [tab]
 	endfor
